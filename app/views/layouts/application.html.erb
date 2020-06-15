@@ -10,6 +10,18 @@
   </head>
 
   <body>
+    <% if flash[:success].present? %>
+    <div class="success">
+      <%= flash[:success] %>
+    </div>
+    <% end %>
+
+    <header>
+      <h1>Source</h1>
+      <nav>
+        Username is <%= @current_user.username %>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

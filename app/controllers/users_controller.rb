@@ -10,6 +10,12 @@ class UsersController < ApplicationController
 
     # check if user can save
     if @user.save
+      #keep hold of that user
+      session[:user_id] = @user.id
+
+      #let the user know they've signed up
+      flash[:success] = "Welcome to Source!"
+
       redirect_to root_path
     else
       render 'new'
