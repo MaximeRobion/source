@@ -3,13 +3,14 @@ class ApplicationController < ActionController::Base
 
   #expose this to controllers AND VIEWS
   helper_method :current_user
+  helper_method :is_logged_in?
 
   #run this on every single page and Action
   before_action :current_user
 
   def current_user
     #if the user is logged in
-    if session[:user_id].present?
+    if is_logged_in?
       @current_user = User.find(session[:user_id])
     else
       @current_user = nil
@@ -19,6 +20,9 @@ class ApplicationController < ActionController::Base
     @current_user
   end
 
+  def is_logged_in?
+    session[:user_id].present?
+  end
 
 
 end
