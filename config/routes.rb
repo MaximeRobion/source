@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  #active admin urls
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  #items controllers
+  resources :items
+
   # users could sign up multiple times
   resources :users
   # user can only make 1 session
