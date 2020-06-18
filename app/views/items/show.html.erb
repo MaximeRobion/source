@@ -2,9 +2,10 @@
 
   <h1><%= @item.title %></h1>
 
-  <% @item.categories.each do |cat| %>
-    <span><%= link_to cat.title, category_path(cat) %></span>
-  <% end %>
+<p>
+  <strong>Categories:</strong>
+  <%= format_categories @item.categories %>
+</p>
 
   <%= simple_format @item.description %>
   <%= image_tag @item.image.url %>
