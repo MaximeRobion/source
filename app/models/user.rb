@@ -16,12 +16,14 @@ class User < ApplicationRecord
     if self.valid?
       #create a strip customer
       customer = Stripe::Customer.create(source: self.stripe_token, description: self.email)
+
       #make a subscription
-      subscription = Stripe::Subscription.create(customer: customer.id, items: [
-        {
-        plan: self.subscription_plan
-        }
-        ])
+      subscription = Stripe::Subscription.create({
+        customer: customer.id,
+        items: [
+          {plan: self.subscription_plan},           #maybe is not plan: but product: because now subscription need both a customer and a produc
+        ],
+        })
 
       #save the customer id to the database
       self.stripe_customer = customer.id
@@ -31,9 +33,6 @@ class User < ApplicationRecord
     else
       false
     end
-
-
-
   end
 
 end
